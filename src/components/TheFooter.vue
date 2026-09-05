@@ -15,7 +15,7 @@ const year = new Date().getFullYear()
           {{ personal.name }}
         </p>
         <p class="text-xs text-slate-500">
-          © {{ year }} · Built with Vue &amp; Tailwind CSS
+          © {{ year }} · Built by Racheal &amp; Dev
         </p>
       </div>
 
