@@ -283,7 +283,7 @@ export const certifications = [
 // Certificate documents shown as viewable cards in the Certificates section.
 // Files live in /public — image certs render as thumbnails, PDFs as a doc card.
 export const certificates = [
-  { title: 'AI for Business', issuer: 'Udemy', file: 'ai-for-business-udemy.pdf', type: 'pdf' },
+  { title: 'AI for Business', issuer: 'Udemy', file: 'ai-for-business-udemy.jpg', type: 'image' },
   { title: 'Go (Golang) Programming', issuer: 'Udemy', file: 'golang-cert-udemy.jpg', type: 'image' },
   { title: 'Linux Commands', issuer: null, file: 'linux-commands.jpg', type: 'image' },
   { title: 'RabbitMQ', issuer: null, file: 'rabbitmq-cert.jpg', type: 'image' },
