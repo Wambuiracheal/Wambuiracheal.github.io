@@ -20,7 +20,7 @@ const channels = [
   <section id="contact" class="relative py-14 sm:py-16">
     <div class="container-page">
       <SectionHeading
-        index="06"
+        index="07"
         title="Let's build something"
         subtitle="Available for frontend and fullstack roles. The fastest way to reach me is email — I usually reply within a day."
       />
