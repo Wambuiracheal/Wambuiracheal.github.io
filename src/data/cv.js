@@ -37,8 +37,11 @@ export const skills = [
       'React',
       'Vue',
       'Nuxt',
+      'Next.js',
+      'typescript,javascript',
       'Tailwind CSS',
       'Flexbox / Grid',
+      'Redux , Zustand (state management)',
       'Responsive & cross-browser design',
     ],
   },
@@ -61,7 +64,6 @@ export const skills = [
       'PostgreSQL',
       'SQLite',
       'Redis',
-      'Zustand (state management)',
     ],
   },
   {
@@ -215,7 +217,7 @@ export const projects = [
     name: 'Emalify Business',
     description: 'Frontend for a communication / messaging platform for businesses.',
     url: 'https://business.emalify.com/',
-    tech: ['React'],
+    tech: ['Vue and Nuxt'],
     status: null,
     featured: true,
   },
@@ -300,6 +302,18 @@ export const awards = [
 ]
 
 export const references = [
+  {
+    name: 'Felista Warigia',
+    role: 'Senior HR Officer, Roamtech Solutions Limited',
+    email: 'felista.warigia89@gmail.com',
+    phone: '0711401144',
+  },
+  {
+    name: 'Victor Kinoti',
+    role: 'Senior Mobile Developer and Lead Mobile Development, Roamtech Solutions Limited',
+    email: 'victor.kinoti@gmail.com',
+    phone: '0711854897',
+  },
   {
     name: "Edwin Ng'ang'a Ruhiu",
     role: 'Head of Development, Payless',
