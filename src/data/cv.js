@@ -87,7 +87,6 @@ export const skills = [
       'Printer / peripheral maintenance',
       'Wi-Fi access points, routers, switches',
       'Linux & Windows administration',
-      'POS system installation, configuration & troubleshooting',
     ],
   },
   {
@@ -137,7 +136,7 @@ export const experience = [
   {
     role: 'Software Documentation & Product Marketing Intern',
     company: 'Clinical Data Management Solutions',
-    location: null,
+    location: 'Karen, Nairobi, Kenya',
     start: 'Jun 2024',
     end: 'Sep 2024',
     type: 'Internship',
