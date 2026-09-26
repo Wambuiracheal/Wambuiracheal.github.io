@@ -2,23 +2,26 @@
 import AppIcon from './AppIcon.vue'
 import { navLinks, personal } from '../data/cv.js'
 
+// Keeps the copyright year current without manual edits.
 const year = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="border-t border-white/10 py-10">
+  <footer class="border-t border-white/10 py-6 sm:py-8">
+    <!-- Stacked and centred on phones; name, links and icons in one row from sm up -->
     <div
-      class="container-page flex flex-col items-center justify-between gap-6 sm:flex-row"
+      class="container-page flex flex-col items-center justify-between gap-4 sm:flex-row sm:gap-6"
     >
       <div class="text-center sm:text-left">
         <p class="font-display font-semibold text-slate-200">
           {{ personal.name }}
         </p>
         <p class="text-xs text-slate-500">
-          © {{ year }} · Built by Racheal &amp; Dev
+          © {{ year }} · Built by Racheal 
         </p>
       </div>
 
+      <!-- Section links (same list as the top nav) -->
       <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2">
         <a
           v-for="link in navLinks"
@@ -30,6 +33,7 @@ const year = new Date().getFullYear()
         </a>
       </nav>
 
+      <!-- Social / contact icons -->
       <div class="flex items-center gap-1">
         <a
           :href="personal.github"

@@ -4,12 +4,13 @@ import AppIcon from './AppIcon.vue'
 import SectionHeading from './SectionHeading.vue'
 import { projects } from '../data/cv.js'
 
+// Projects flagged `featured` in cv.js get large cards; the rest go under "More work".
 const featured = computed(() => projects.filter((p) => p.featured))
 const more = computed(() => projects.filter((p) => !p.featured))
 </script>
 
 <template>
-  <section id="projects" class="relative py-14 sm:py-16">
+  <section id="projects" class="relative py-5 sm:py-8">
     <div class="container-page">
       <SectionHeading
         index="04"
@@ -18,12 +19,12 @@ const more = computed(() => projects.filter((p) => !p.featured))
       />
 
       <!-- Featured -->
-      <div class="grid gap-5 md:grid-cols-3">
+      <div class="grid gap-4 sm:gap-5 md:grid-cols-3">
         <article
           v-for="(p, i) in featured"
           :key="p.name"
           v-reveal="{ delay: i * 80 }"
-          class="card-surface group flex flex-col rounded-2xl p-6 transition-all hover:-translate-y-1 hover:border-brand-500/40"
+          class="card-surface group flex flex-col rounded-2xl p-4 sm:p-6 transition-all hover:-translate-y-1 hover:border-brand-500/40"
         >
           <div class="mb-4 flex items-center justify-between">
             <span
@@ -43,8 +44,9 @@ const more = computed(() => projects.filter((p) => !p.featured))
             </a>
           </div>
 
-          <h3 class="text-lg font-semibold text-slate-100">{{ p.name }}</h3>
-          <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-400">
+          <h3 class="text-base font-semibold text-slate-100 sm:text-lg">{{ p.name }}</h3>
+          <!-- flex-1 pushes the tech tags to the bottom so cards in a row line up -->
+          <p class="mt-2 flex-1 text-[13px] leading-relaxed sm:text-sm text-slate-400">
             {{ p.description }}
           </p>
 
@@ -63,7 +65,7 @@ const more = computed(() => projects.filter((p) => !p.featured))
       <!-- More -->
       <h3
         v-reveal
-        class="mt-10 mb-5 font-display text-sm font-semibold uppercase tracking-widest text-slate-500"
+        class="mt-6 mb-4 font-display sm:mt-8 sm:mb-5 text-sm font-semibold uppercase tracking-widest text-slate-500"
       >
         More work
       </h3>
@@ -72,10 +74,11 @@ const more = computed(() => projects.filter((p) => !p.featured))
           v-for="(p, i) in more"
           :key="p.name"
           v-reveal="{ delay: (i % 2) * 70 }"
-          class="card-surface rounded-xl p-5"
+          class="card-surface rounded-xl p-4 sm:p-5"
         >
           <div class="flex items-start justify-between gap-3">
             <h4 class="font-semibold text-slate-200">{{ p.name }}</h4>
+            <!-- Optional badge, e.g. "In progress" -->
             <span
               v-if="p.status"
               class="flex-none rounded-full border border-accent-500/25 bg-accent-500/[0.08] px-2.5 py-0.5 text-[11px] font-medium text-accent-200"
@@ -83,7 +86,7 @@ const more = computed(() => projects.filter((p) => !p.featured))
               {{ p.status }}
             </span>
           </div>
-          <p class="mt-2 text-sm leading-relaxed text-slate-400">{{ p.description }}</p>
+          <p class="mt-2 text-[13px] leading-relaxed sm:text-sm text-slate-400">{{ p.description }}</p>
           <div class="mt-3 flex flex-wrap items-center gap-2">
             <span
               v-for="t in p.tech"
@@ -92,6 +95,7 @@ const more = computed(() => projects.filter((p) => !p.featured))
             >
               {{ t }}
             </span>
+            <!-- ml-auto pushes the link to the far right of the tag row -->
             <a
               v-if="p.url"
               :href="p.url"

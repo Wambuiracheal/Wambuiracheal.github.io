@@ -3,6 +3,7 @@ import AppIcon from './AppIcon.vue'
 import SectionHeading from './SectionHeading.vue'
 import { personal } from '../data/cv.js'
 
+// Quick-glance fact cards shown beside the highlights list.
 const facts = [
   { icon: 'pin', label: 'Based in', value: personal.location },
   { icon: 'briefcase', label: 'Focus', value: 'Frontend · Fullstack' },
@@ -10,6 +11,7 @@ const facts = [
   { icon: 'check', label: 'Availability', value: 'Open to opportunities' },
 ]
 
+// Key strengths, each rendered with a check mark.
 const highlights = [
   'Production-grade web apps with React, Vue, JavaScript / TypeScript and Tailwind CSS.',
   'REST API & WebSocket integration; backends in PHP/Laravel, Node/Express and Python/Flask.',
@@ -19,20 +21,21 @@ const highlights = [
 </script>
 
 <template>
-  <section id="about" class="container-page py-14 sm:py-16">
+  <section id="about" class="container-page py-5 sm:py-8">
     <SectionHeading
       index="01"
       title="About me"
       subtitle="A fullstack engineer who leans frontend — turning designs into fast, accessible interfaces, and comfortable going down to the infrastructure when it counts."
     />
 
-    <div class="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
-      <div v-reveal class="card-surface rounded-2xl p-7 sm:p-8">
+    <div class="grid gap-4 sm:gap-6 lg:grid-cols-[1.4fr_1fr]">
+      <!-- Highlights card (wider column on large screens) -->
+      <div v-reveal class="card-surface rounded-2xl p-5 sm:p-8">
         <ul class="space-y-4">
           <li
             v-for="(h, i) in highlights"
             :key="i"
-            class="flex gap-3 text-sm leading-relaxed text-slate-300"
+            class="flex gap-3 text-[13px] leading-relaxed sm:text-sm text-slate-300"
           >
             <span
               class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-brand-500/15 text-brand-300"
@@ -44,6 +47,7 @@ const highlights = [
         </ul>
       </div>
 
+      <!-- Fact cards: 1 column on phones, 2 on tablets, stacked beside the highlights on desktop -->
       <dl v-reveal="{ delay: 100 }" class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
         <div
           v-for="f in facts"

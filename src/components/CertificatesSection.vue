@@ -3,18 +3,21 @@ import AppIcon from './AppIcon.vue'
 import SectionHeading from './SectionHeading.vue'
 import { certificates } from '../data/cv.js'
 
+// Certificate files live in /public; prefix with the deploy base so links
+// work on GitHub Pages subpaths too.
 const base = import.meta.env.BASE_URL
 </script>
 
 <template>
-  <section id="certificates" class="container-page py-14 sm:py-16">
+  <section id="certificates" class="container-page py-5 sm:py-8">
     <SectionHeading
       index="06"
       title="Certificates"
       subtitle="Courses completed to round out my skills across AI, backend languages, messaging, and infrastructure."
     />
 
-    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <!-- Each card opens the full certificate in a new tab -->
+    <div class="grid gap-4 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
       <a
         v-for="(c, i) in certificates"
         :key="c.file"
@@ -24,6 +27,7 @@ const base = import.meta.env.BASE_URL
         v-reveal="{ delay: (i % 3) * 80 }"
         class="card-surface group flex flex-col overflow-hidden rounded-2xl transition-all hover:-translate-y-1 hover:border-brand-500/40"
       >
+        <!-- Preview: image thumbnail, or a document icon for PDFs -->
         <div class="relative aspect-[4/3] overflow-hidden bg-ink-900">
           <img
             v-if="c.type === 'image'"
@@ -39,13 +43,14 @@ const base = import.meta.env.BASE_URL
             <AppIcon name="doc" :size="32" />
             <span class="text-xs font-medium uppercase tracking-widest text-slate-500">PDF</span>
           </div>
+          <!-- "Opens externally" hint in the corner -->
           <span
             class="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-ink-950/80 text-slate-300 backdrop-blur transition-colors group-hover:text-brand-300"
           >
             <AppIcon name="external" :size="15" />
           </span>
         </div>
-        <div class="p-5">
+        <div class="p-4 sm:p-5">
           <h3 class="text-sm font-semibold text-slate-100">{{ c.title }}</h3>
           <p v-if="c.issuer" class="mt-1 text-xs text-slate-500">{{ c.issuer }}</p>
         </div>

@@ -5,21 +5,21 @@ import { awards, certifications, education } from '../data/cv.js'
 </script>
 
 <template>
-  <section id="education" class="container-page py-14 sm:py-16">
+  <section id="education" class="container-page py-5 sm:py-8">
     <SectionHeading
       index="05"
       title="Education & recognition"
       subtitle="Formal IT degree, an intensive fullstack program, plus certifications and an innovation award."
     />
 
-    <div class="grid gap-8 lg:grid-cols-[1.3fr_1fr]">
+    <div class="grid gap-4 sm:gap-6 lg:grid-cols-[1.3fr_1fr]">
       <!-- Education timeline -->
       <div class="space-y-4">
         <div
           v-for="(ed, i) in education"
           :key="i"
           v-reveal="{ delay: i * 80 }"
-          class="card-surface rounded-2xl p-6"
+          class="card-surface rounded-2xl p-4 sm:p-6"
         >
           <div class="flex items-start gap-4">
             <span
@@ -35,7 +35,7 @@ import { awards, certifications, education } from '../data/cv.js'
               <p class="mt-0.5 text-sm font-medium text-brand-300">
                 {{ ed.institution }}
               </p>
-              <p class="mt-2 text-sm leading-relaxed text-slate-400">{{ ed.details }}</p>
+              <p class="mt-2 text-[13px] leading-relaxed sm:text-sm text-slate-400">{{ ed.details }}</p>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ import { awards, certifications, education } from '../data/cv.js'
 
       <!-- Certs + Awards -->
       <div class="space-y-4">
-        <div v-reveal class="card-surface rounded-2xl p-6">
+        <div v-reveal class="card-surface rounded-2xl p-4 sm:p-6">
           <h3 class="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-widest text-slate-400">
             <AppIcon name="doc" :size="16" /> Certifications
           </h3>
@@ -66,11 +66,12 @@ import { awards, certifications, education } from '../data/cv.js'
           </ul>
         </div>
 
+        <!-- Awards get a gold-tinted card to stand out -->
         <div
           v-for="(a, i) in awards"
           :key="i"
           v-reveal="{ delay: 80 }"
-          class="rounded-2xl border border-amber-400/25 bg-gradient-to-br from-amber-400/[0.08] to-transparent p-6"
+          class="rounded-2xl border border-amber-400/25 bg-gradient-to-br from-amber-400/[0.08] to-transparent p-4 sm:p-6"
         >
           <div class="flex items-center gap-3">
             <span
@@ -83,7 +84,7 @@ import { awards, certifications, education } from '../data/cv.js'
               <p class="text-xs text-amber-200/70">{{ a.issuer }} · {{ a.date }}</p>
             </div>
           </div>
-          <p class="mt-3 text-sm leading-relaxed text-amber-100/80">{{ a.context }}</p>
+          <p class="mt-3 text-[13px] leading-relaxed sm:text-sm text-amber-100/80">{{ a.context }}</p>
         </div>
       </div>
     </div>

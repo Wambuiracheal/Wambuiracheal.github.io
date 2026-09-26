@@ -3,19 +3,23 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import AppIcon from './AppIcon.vue'
 import { navLinks, personal } from '../data/cv.js'
 
+// Small avatar in the logo, resolved against the deploy base path.
 const photoUrl = import.meta.env.BASE_URL + 'racheal.jpg'
 
-const scrolled = ref(false)
-const menuOpen = ref(false)
+const scrolled = ref(false) // true once the page moves; gives the bar a solid background
+const menuOpen = ref(false) // mobile dropdown menu state
 
+// A few pixels of tolerance so the bar doesn't flicker at the very top.
 function onScroll() {
   scrolled.value = window.scrollY > 12
 }
 
+// Closes the mobile menu after a link is tapped.
 function close() {
   menuOpen.value = false
 }
 
+// Check once on load (the page may open already scrolled), then track scrolling.
 onMounted(() => {
   onScroll()
   window.addEventListener('scroll', onScroll, { passive: true })
@@ -24,6 +28,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 </script>
 
 <template>
+  <!-- Fixed top bar: transparent over the hero, frosted once scrolled or when the menu is open -->
   <header
     class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
     :class="
@@ -33,6 +38,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
     "
   >
     <nav class="container-page flex h-16 items-center justify-between">
+      <!-- Logo: avatar + initials, scrolls back to the top. Avatar hides itself if the image fails. -->
       <a
         href="#top"
         class="flex items-center gap-2.5 font-display text-lg font-bold text-slate-100"
@@ -47,6 +53,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
         RW<span class="text-brand-400">.</span>
       </a>
 
+      <!-- Desktop section links -->
       <ul class="hidden items-center gap-1 md:flex">
         <li v-for="link in navLinks" :key="link.href">
           <a
@@ -58,6 +65,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
         </li>
       </ul>
 
+      <!-- Desktop actions -->
       <div class="hidden items-center gap-2 md:flex">
         <a
           :href="personal.github"
@@ -76,6 +84,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
         </a>
       </div>
 
+      <!-- Mobile hamburger / close toggle -->
       <button
         class="rounded-lg p-2 text-slate-300 md:hidden"
         :aria-expanded="menuOpen"
@@ -86,6 +95,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
       </button>
     </nav>
 
+    <!-- Mobile dropdown menu, slides/fades in below the bar -->
     <Transition
       enter-active-class="transition duration-200 ease-out"
       enter-from-class="opacity-0 -translate-y-2"

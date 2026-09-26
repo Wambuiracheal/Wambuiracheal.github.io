@@ -1,6 +1,7 @@
 // Single source of truth for all portfolio content.
 // Edit values here and every section updates automatically.
 
+// Name, headline and contact details used in the hero, nav, contact and footer.
 export const personal = {
   name: 'Racheal Wambui Njuguna',
   title: 'Software Engineer',
@@ -13,6 +14,7 @@ export const personal = {
   github: 'https://github.com/Wambuiracheal',
 }
 
+// Intro paragraph shown in the hero.
 export const summary =
   'Fullstack Software Engineer with a strong specialization in Frontend Development, and hands-on experience across backend development, IT support, network administration, and technical documentation. Skilled in building responsive, production-grade web applications with React, Vue, JavaScript/TypeScript, and Tailwind CSS, integrating REST APIs and WebSockets, and working across PHP/Laravel, Node.js/Express.js, and Python/Flask on the backend. Experienced in Agile teams, code reviews, CI/CD, and cross-functional collaboration with design, product, QA, and engineering stakeholders. Brings additional depth from IT support, networking, and cybersecurity awareness, and a consistent record of quickly learning new languages, frameworks, and tools.'
 
@@ -24,6 +26,7 @@ export const stats = [
   { value: '1', label: 'Best Female Innovator award' },
 ]
 
+// Skills section: one card per group. `icon` must match a name in AppIcon.vue.
 export const skills = [
   {
     group: 'Languages',
@@ -101,6 +104,8 @@ export const skills = [
   },
 ]
 
+// Experience timeline, newest first. `end: 'Present'` marks the current role
+// (highlighted dot); `note` shows an optional callout; `location` can be null.
 export const experience = [
   {
     role: 'Junior Frontend Developer & Support Engineer',
@@ -192,6 +197,8 @@ export const experience = [
   },
 ]
 
+// `featured: true` → large card at the top; otherwise listed under "More work".
+// `url` and `status` are optional (null hides the link / badge).
 export const projects = [
   {
     name: 'PayKit Merchant Portal',
@@ -256,6 +263,7 @@ export const projects = [
   },
 ]
 
+// Degrees and programmes, newest first.
 export const education = [
   {
     degree: 'Certificate in Software Engineering (Full-Stack)',
@@ -275,6 +283,7 @@ export const education = [
   },
 ]
 
+// Text list of certifications shown in the Education section.
 export const certifications = [
   { name: 'Cybersecurity and Emerging Technologies Awareness Training', issuer: null, status: 'Completed' },
   { name: 'AI for Business', issuer: 'Udemy', status: 'Completed' },
@@ -290,6 +299,7 @@ export const certificates = [
   { title: 'Site Reliability Engineering (SRE)', issuer: null, file: 'sre-cert.jpg', type: 'image' },
 ]
 
+// Awards shown as gold cards in the Education section.
 export const awards = [
   {
     name: 'Best Female Innovator',
@@ -299,6 +309,7 @@ export const awards = [
   },
 ]
 
+// Referees listed in the Contact section.
 export const references = [
   {
     name: 'Felista Warigia',
@@ -326,6 +337,7 @@ export const references = [
   },
 ]
 
+// Nav and footer links. Each `href` must match a section `id`.
 export const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },

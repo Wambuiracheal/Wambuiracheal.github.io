@@ -1,10 +1,13 @@
 <script setup>
 // Lightweight inline icon set (stroke-based, 24x24).
+// Usage: <AppIcon name="mail" :size="16" />. Icons inherit the text colour
+// (stroke="currentColor"), so style them with text-* classes.
 defineProps({
   name: { type: String, required: true },
   size: { type: [Number, String], default: 20 },
 })
 
+// Icon name → list of SVG path strings. To add an icon, add an entry here.
 const paths = {
   code: ['M8 6 2 12l6 6', 'M16 6l6 6-6 6'],
   layout: ['M3 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z', 'M3 9h18', 'M9 21V9'],
@@ -52,6 +55,7 @@ const paths = {
     stroke-linejoin="round"
     aria-hidden="true"
   >
+    <!-- Unknown names render an empty icon instead of throwing -->
     <path v-for="(d, i) in paths[name] || []" :key="i" :d="d" />
   </svg>
 </template>

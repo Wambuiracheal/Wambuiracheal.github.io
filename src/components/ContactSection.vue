@@ -3,6 +3,7 @@ import AppIcon from './AppIcon.vue'
 import SectionHeading from './SectionHeading.vue'
 import { personal, references } from '../data/cv.js'
 
+// Contact methods shown as clickable tiles (mailto:, tel:, and profile links).
 const channels = [
   { icon: 'mail', label: 'Email', value: personal.email, href: `mailto:${personal.email}` },
   { icon: 'phone', label: 'Phone', value: personal.phone, href: `tel:${personal.phone}` },
@@ -17,7 +18,7 @@ const channels = [
 </script>
 
 <template>
-  <section id="contact" class="relative py-14 sm:py-16">
+  <section id="contact" class="relative py-5 sm:py-8">
     <div class="container-page">
       <SectionHeading
         index="07"
@@ -25,9 +26,11 @@ const channels = [
         subtitle="Available for frontend and fullstack roles. The fastest way to reach me is email — I usually reply within a day."
       />
 
-      <div class="grid gap-8 lg:grid-cols-2">
-        <div v-reveal class="card-surface rounded-2xl p-7 sm:p-8">
+      <div class="grid gap-4 sm:gap-6 lg:grid-cols-2">
+        <!-- Contact card -->
+        <div v-reveal class="card-surface rounded-2xl p-5 sm:p-8">
           <div class="grid gap-3 sm:grid-cols-2">
+            <!-- Only web links open in a new tab; mailto/tel stay in place -->
             <a
               v-for="c in channels"
               :key="c.label"
@@ -41,6 +44,7 @@ const channels = [
               >
                 <AppIcon :name="c.icon" :size="18" />
               </span>
+              <!-- min-w-0 lets long values (like the email) truncate instead of overflowing -->
               <span class="min-w-0">
                 <span class="block text-[11px] uppercase tracking-widest text-slate-500">
                   {{ c.label }}
@@ -52,6 +56,7 @@ const channels = [
             </a>
           </div>
 
+          <!-- Location -->
           <div
             class="mt-4 flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] p-4 text-sm text-slate-400"
           >
@@ -59,6 +64,7 @@ const channels = [
             {{ personal.location }} · {{ personal.address }}
           </div>
 
+          <!-- Primary call to action -->
           <a
             :href="`mailto:${personal.email}`"
             class="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-600/25 transition-transform hover:-translate-y-0.5"
@@ -67,6 +73,7 @@ const channels = [
           </a>
         </div>
 
+        <!-- References list -->
         <div v-reveal="{ delay: 100 }">
           <h3
             class="mb-4 font-display text-sm font-semibold uppercase tracking-widest text-slate-500"
@@ -77,7 +84,7 @@ const channels = [
             <div
               v-for="(r, i) in references"
               :key="i"
-              class="card-surface rounded-xl p-5"
+              class="card-surface rounded-xl p-4 sm:p-5"
             >
               <p class="font-semibold text-slate-100">{{ r.name }}</p>
               <p class="text-sm text-brand-300">{{ r.role }}</p>

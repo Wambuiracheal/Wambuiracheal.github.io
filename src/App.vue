@@ -1,4 +1,6 @@
 <script setup>
+// Root layout: a fixed nav, then every page section stacked in scroll order,
+// then the footer. Each section's `id` matches an entry in `navLinks` (cv.js).
 import TheNav from './components/TheNav.vue'
 import HeroSection from './components/HeroSection.vue'
 import AboutSection from './components/AboutSection.vue'

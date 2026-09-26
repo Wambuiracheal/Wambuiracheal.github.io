@@ -8,4 +8,12 @@ export default defineConfig({
   // or a GitHub Pages project subpath (e.g. /Portfolio/).
   base: './',
   plugins: [vue(), tailwindcss()],
+  server: {
+    // Native file events are unreliable on some Windows setups; polling makes
+    // the dev server pick up every save without a restart.
+    watch: {
+      usePolling: true,
+      interval: 300,
+    },
+  },
 })
