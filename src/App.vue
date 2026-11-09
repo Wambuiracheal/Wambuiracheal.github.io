@@ -11,6 +11,7 @@ import EducationSection from './components/EducationSection.vue'
 import CertificatesSection from './components/CertificatesSection.vue'
 import ContactSection from './components/ContactSection.vue'
 import TheFooter from './components/TheFooter.vue'
+import AwardsSection from './components/AwardsSection.vue'
 </script>
 
 <template>
@@ -23,6 +24,7 @@ import TheFooter from './components/TheFooter.vue'
     <ProjectsSection />
     <EducationSection />
     <CertificatesSection />
+    <AwardsSection />
     <ContactSection />
   </main>
   <TheFooter />

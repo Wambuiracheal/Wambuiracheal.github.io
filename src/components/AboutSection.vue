@@ -7,7 +7,7 @@ import { personal } from '../data/cv.js'
 const facts = [
   { icon: 'pin', label: 'Based in', value: personal.location },
   { icon: 'briefcase', label: 'Focus', value: 'Frontend · Fullstack' },
-  { icon: 'sparkle', label: 'Also strong in', value: 'IT support · Networking · Docs' },
+  { icon: 'sparkle', label: 'Also strong in', value: 'IT support <· Docs' },
   { icon: 'check', label: 'Availability', value: 'Open to opportunities' },
 ]
 
@@ -16,7 +16,7 @@ const highlights = [
   'Production-grade web apps with React, Vue, JavaScript / TypeScript and Tailwind CSS.',
   'REST API & WebSocket integration; backends in PHP/Laravel, Node/Express and Python/Flask.',
   'Agile delivery — code reviews, CI/CD, and cross-functional work with design, product & QA.',
-  'Fast learner across new languages, frameworks and tools, backed by an IT & networking foundation.',
+  'Fast learner across new languages, frameworks and tools, backed by an IT support foundation.',
 ]
 </script>
 

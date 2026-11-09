@@ -16,7 +16,7 @@ export const personal = {
 
 // Intro paragraph shown in the hero.
 export const summary =
-  'Fullstack Software Engineer with a strong specialization in Frontend Development, and hands-on experience across backend development, IT support, network administration, and technical documentation. Skilled in building responsive, production-grade web applications with React, Vue, JavaScript/TypeScript, and Tailwind CSS, integrating REST APIs and WebSockets, and working across PHP/Laravel, Node.js/Express.js, and Python/Flask on the backend. Experienced in Agile teams, code reviews, CI/CD, and cross-functional collaboration with design, product, QA, and engineering stakeholders. Brings additional depth from IT support, networking, and cybersecurity awareness, and a consistent record of quickly learning new languages, frameworks, and tools.'
+  'Fullstack Software Engineer with a strong specialization in Frontend Development, and hands-on experience across backend development, IT support, and technical documentation. Skilled in building responsive, production-grade web applications with React, Vue, JavaScript/TypeScript, and Tailwind CSS, integrating REST APIs and WebSockets, and working across PHP/Laravel, Node.js/Express.js, and Python/Flask on the backend. Experienced in Agile teams, code reviews, CI/CD, and cross-functional collaboration with design, product, QA, and engineering stakeholders. Brings additional depth from IT support, and cybersecurity awareness, and a consistent record of quickly learning new languages, frameworks, and tools.'
 
 // Compact highlight stats shown under the hero.
 export const stats = [
@@ -83,12 +83,11 @@ export const skills = [
     ],
   },
   {
-    group: 'IT Support & Networking',
+    group: 'IT Support',
     icon: 'network',
     items: [
       'Hardware / software installation & troubleshooting',
       'Printer / peripheral maintenance',
-      'Wi-Fi access points, routers, switches',
       'Linux & Windows administration',
     ],
   },
@@ -229,7 +228,7 @@ export const projects = [
   {
     name: 'Laundry App',
     description: 'On-demand laundry service platform.',
-    url: 'https://github.com/Wambuiracheal/laundry-app',
+    url: 'https://panda-laundry.netlify.app/',
     tech: ['React', 'Express.js', 'Redis'],
     status: 'In progress',
     featured: false,
@@ -239,7 +238,7 @@ export const projects = [
     description:
       'Fullstack artwork / CRUD management system with database flexibility across multiple relational databases; APIs tested via Postman.',
     url: null,
-    tech: ['Flask', 'React', 'JavaScript', 'HTML', 'CSS', 'PostgreSQL', 'MySQL', 'SQLite'],
+    tech: ['Flask', 'React', 'JavaScript', 'HTML', 'CSS', 'MySQL', 'SQLite'],
     status: null,
     featured: false,
   },
@@ -279,7 +278,7 @@ export const education = [
     start: '2019',
     end: '2024',
     details:
-      'Foundation in software development, databases, networking, cybersecurity, data science, and information systems.',
+      'Foundation in software development, databases, cybersecurity, data science, and information systems.',
   },
 ]
 
@@ -287,6 +286,10 @@ export const education = [
 export const certifications = [
   { name: 'Cybersecurity and Emerging Technologies Awareness Training', issuer: null, status: 'Completed' },
   { name: 'AI for Business', issuer: 'Udemy', status: 'Completed' },
+  { name: 'Go (Golang) Programming', issuer: 'Udemy', status: 'Completed' },
+  { name: 'Linux Commands', issuer: null, status: 'Completed' },
+  { name: 'RabbitMQ', issuer: null, status: 'Completed' },
+  { name: 'Site Reliability Engineering (SRE)', issuer: null, status: 'Completed' },
 ]
 
 // Certificate documents shown as viewable cards in the Certificates section.
@@ -308,6 +311,13 @@ export const awards = [
     context: 'Awarded for contributions to Tiketi Tamasha, an event management system.',
   },
 ]
+
+// awards images as slides 
+export const awardImages = [
+  { title: 'Best Female Innovator', file: 'best-female-innovator-award.jpg', type: 'image' },
+  { title: 'Award Ceremony', file: 'award-ceremony.jpg', type: 'image' },
+  { title: 'Award Presentation', file: 'award-presentation.jpg', type: 'image' },
+]n dev
 
 // Referees listed in the Contact section.
 export const references = [
