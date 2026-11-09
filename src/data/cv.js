@@ -20,7 +20,7 @@ export const summary =
 
 // Compact highlight stats shown under the hero.
 export const stats = [
-  { value: '2+', label: 'Years in tech' },
+  { value: '1+', label: 'Years in tech' },
   { value: '7', label: 'Shipped projects' },
   { value: '6', label: 'Roles across the stack' },
   { value: '1', label: 'Best Female Innovator award' },
@@ -111,7 +111,7 @@ export const experience = [
     company: 'Roamtech Solutions Limited',
     location: 'Nairobi, Kenya',
     start: 'Sep 2025',
-    end: 'Present',
+    end: 'Aug 2026',
     type: 'Full-time',
     note: 'Promoted to full-time following a 6-month internship (Mar 2025 – Aug 2025).',
     highlights: [

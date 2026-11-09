@@ -7,7 +7,7 @@ import { personal } from '../data/cv.js'
 const facts = [
   { icon: 'pin', label: 'Based in', value: personal.location },
   { icon: 'briefcase', label: 'Focus', value: 'Frontend · Fullstack' },
-  { icon: 'sparkle', label: 'Also strong in', value: 'IT support <· Docs' },
+  { icon: 'sparkle', label: 'Also strong in', value: 'IT support · Docs' },
   { icon: 'check', label: 'Availability', value: 'Open to opportunities' },
 ]
 
