@@ -312,12 +312,19 @@ export const awards = [
   },
 ]
 
-// awards images as slides 
+// Photos for the Best Female Innovator carousel in the Awards section.
+// Files live in public/awards/web/ (web-optimised copies of the originals).
 export const awardImages = [
-  { title: 'Best Female Innovator', file: 'best-female-innovator-award.jpg', type: 'image' },
-  { title: 'Award Ceremony', file: 'award-ceremony.jpg', type: 'image' },
-  { title: 'Award Presentation', file: 'award-presentation.jpg', type: 'image' },
-]n dev
+  { file: 'best-female-innovator-01.jpg', alt: 'Group photo at the Co-operative University of Kenya Innovation Week' },
+  { file: 'best-female-innovator-02.jpg', alt: 'Best Female Innovator award event' },
+  { file: 'best-female-innovator-03.jpg', alt: 'Best Female Innovator award event' },
+  { file: 'best-female-innovator-04.jpg', alt: 'Best Female Innovator award event' },
+  { file: 'best-female-innovator-05.jpg', alt: 'Receiving the Best Female Innovator trophy at the ICT Authority stand' },
+  { file: 'best-female-innovator-06.jpg', alt: 'Best Female Innovator award event' },
+  { file: 'best-female-innovator-07.jpg', alt: 'Best Female Innovator award event' },
+  { file: 'best-female-innovator-08.jpg', alt: 'Best Female Innovator award event' },
+  { file: 'best-female-innovator-09.jpg', alt: 'Best Female Innovator award event' },
+]
 
 // Referees listed in the Contact section.
 export const references = [
