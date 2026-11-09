@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
 import AppIcon from './AppIcon.vue'
 import SectionHeading from './SectionHeading.vue'
 import { awardImages } from '../data/cv.js'
@@ -13,17 +13,70 @@ const highlights = {
 // Award photos live in /public/awards/web; prefix with the deploy base so
 // they resolve on GitHub Pages subpaths too.
 const base = import.meta.env.BASE_URL
-const slides = awardImages.map((img) => ({ ...img, src: `${base}awards/web/${img.file}` }))
-
-// ---- Carousel state ----
-const current = ref(0)
+const slides = awardImages.map((img, i) => ({ ...img, i, src: `${base}awards/web/${img.file}` }))
 const total = slides.length
-const go = (i) => (current.value = (i + total) % total)
-const next = () => go(current.value + 1)
-const prev = () => go(current.value - 1)
 
-// Only load the current slide and its neighbours, so the page doesn't pull
-// every photo up front.
+// ---- Infinite carousel ----
+// The track is [clone of last, ...slides, clone of first]. Moving past either
+// end slides onto a clone, then we silently jump to the matching real slide
+// with the transition switched off. The loop always moves in the same direction
+// instead of rewinding through every photo.
+const track = total > 1 ? [slides[total - 1], ...slides, slides[0]] : slides
+const DURATION = 800 // ms
+const EASING = 'cubic-bezier(0.65, 0, 0.35, 1)' // smooth ease-in-out
+
+const reducedMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+const pos = ref(total > 1 ? 1 : 0) // index into `track`
+const animate = ref(true)
+const busy = ref(false)
+const current = computed(() => (total > 1 ? (pos.value - 1 + total) % total : 0))
+
+const trackStyle = computed(() => ({
+  transform: `translate3d(-${pos.value * 100}%, 0, 0)`,
+  transition: animate.value && !reducedMotion ? `transform ${DURATION}ms ${EASING}` : 'none',
+}))
+
+let settleTimer = null
+const moveTo = (p) => {
+  if (busy.value || total < 2) return
+  if (reducedMotion) {
+    // No animation: wrap directly.
+    pos.value = ((p - 1 + total) % total) + 1
+    return
+  }
+  busy.value = true
+  pos.value = p
+  // Fallback in case transitionend never fires (e.g. tab hidden mid-slide).
+  clearTimeout(settleTimer)
+  settleTimer = setTimeout(settle, DURATION + 100)
+}
+
+// After a slide finishes: if we landed on a clone, jump to the real slide
+// without animating, then turn the transition back on.
+const settle = async () => {
+  clearTimeout(settleTimer)
+  if (!busy.value) return
+  if (pos.value === 0 || pos.value === total + 1) {
+    animate.value = false
+    pos.value = pos.value === 0 ? total : 1
+    await nextTick()
+    // Two frames so the browser applies the jump before re-enabling transitions.
+    requestAnimationFrame(() => requestAnimationFrame(() => (animate.value = true)))
+  }
+  busy.value = false
+}
+const onTransitionEnd = (e) => {
+  if (e.target === e.currentTarget && e.propertyName === 'transform') settle()
+}
+
+const next = () => moveTo(pos.value + 1)
+const prev = () => moveTo(pos.value - 1)
+const go = (i) => moveTo(i + 1)
+
+// Load the current photo and its neighbours ahead of time, so a photo is
+// already there when it slides in.
 const loaded = ref(new Set())
 watch(
   current,
@@ -32,21 +85,25 @@ watch(
 )
 const shouldLoad = (i) => loaded.value.has(i)
 
-// Autoplay: pauses on hover/focus and when the user prefers reduced motion.
+// Autoplay: pauses on hover/focus, while the tab is hidden, and when the user
+// prefers reduced motion.
 const INTERVAL = 5000
 const paused = ref(false)
 let timer = null
-const reducedMotion =
-  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const stop = () => timer && clearInterval(timer)
 const start = () => {
   stop()
-  if (!reducedMotion) timer = setInterval(() => !paused.value && next(), INTERVAL)
+  if (!reducedMotion && total > 1) {
+    timer = setInterval(() => !paused.value && !document.hidden && next(), INTERVAL)
+  }
 }
-const stop = () => timer && clearInterval(timer)
 onMounted(start)
-onBeforeUnmount(stop)
+onBeforeUnmount(() => {
+  stop()
+  clearTimeout(settleTimer)
+})
 
-// Restart the timer after manual navigation so it doesn't jump right away.
+// Restart the timer after manual navigation so it doesn't move again right away.
 const manual = (fn) => {
   fn()
   start()
@@ -112,22 +169,23 @@ const counter = computed(() => `${current.value + 1} / ${total}`)
           @touchstart.passive="onTouchStart"
           @touchend="onTouchEnd"
         >
-          <!-- Sliding track -->
+          <!-- Sliding track (with clones at each end for the seamless loop) -->
           <div
-            class="flex h-full transition-transform duration-500 ease-out motion-reduce:transition-none"
-            :style="{ transform: `translateX(-${current * 100}%)` }"
+            class="flex h-full will-change-transform"
+            :style="trackStyle"
+            @transitionend="onTransitionEnd"
           >
             <div
-              v-for="(s, i) in slides"
-              :key="s.file"
+              v-for="(s, t) in track"
+              :key="`${t}-${s.file}`"
               class="h-full w-full flex-none"
               role="group"
               aria-roledescription="slide"
-              :aria-label="`${i + 1} of ${total}`"
-              :aria-hidden="i !== current"
+              :aria-label="`${s.i + 1} of ${total}`"
+              :aria-hidden="t !== pos"
             >
               <img
-                v-if="shouldLoad(i)"
+                v-if="shouldLoad(s.i)"
                 :src="s.src"
                 :alt="s.alt"
                 decoding="async"
@@ -150,6 +208,7 @@ const counter = computed(() => `${current.value + 1} / ${total}`)
 
           <!-- Prev / next -->
           <button
+            v-if="total > 1"
             type="button"
             class="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink-950/70 text-slate-200 backdrop-blur transition-colors hover:text-brand-300 sm:h-10 sm:w-10"
             aria-label="Previous photo"
@@ -158,6 +217,7 @@ const counter = computed(() => `${current.value + 1} / ${total}`)
             <AppIcon name="chevronLeft" :size="18" />
           </button>
           <button
+            v-if="total > 1"
             type="button"
             class="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink-950/70 text-slate-200 backdrop-blur transition-colors hover:text-brand-300 sm:h-10 sm:w-10"
             aria-label="Next photo"
@@ -168,16 +228,16 @@ const counter = computed(() => `${current.value + 1} / ${total}`)
         </div>
 
         <!-- Dots -->
-        <div class="flex flex-wrap justify-center gap-2 p-3">
+        <div v-if="total > 1" class="flex flex-wrap justify-center gap-2 p-3">
           <button
-            v-for="(s, i) in slides"
+            v-for="s in slides"
             :key="s.file"
             type="button"
-            class="h-2 rounded-full transition-all"
-            :class="i === current ? 'w-6 bg-brand-400' : 'w-2 bg-slate-600 hover:bg-slate-400'"
-            :aria-label="`Go to photo ${i + 1}`"
-            :aria-current="i === current"
-            @click="manual(() => go(i))"
+            class="h-2 rounded-full transition-all duration-500"
+            :class="s.i === current ? 'w-6 bg-brand-400' : 'w-2 bg-slate-600 hover:bg-slate-400'"
+            :aria-label="`Go to photo ${s.i + 1}`"
+            :aria-current="s.i === current"
+            @click="manual(() => go(s.i))"
           />
         </div>
       </div>
