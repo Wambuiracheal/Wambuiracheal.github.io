@@ -315,8 +315,8 @@ export const awards = [
 // Photos for the Best Female Innovator carousel in the Awards section.
 // Files live in public/awards/web/ (web-optimised copies of the originals).
 export const awardImages = [
-  { file: 'best-female-innovator-01.jpg', alt: 'Group photo at the Co-operative University of Kenya Innovation Week' },
   { file: 'best-female-innovator-02.jpg', alt: 'Best Female Innovator award event' },
+  { file: 'best-female-innovator-01.jpg', alt: 'Group photo at the Co-operative University of Kenya Innovation Week' },
   { file: 'best-female-innovator-03.jpg', alt: 'Best Female Innovator award event' },
   { file: 'best-female-innovator-04.jpg', alt: 'Best Female Innovator award event' },
   { file: 'best-female-innovator-05.jpg', alt: 'Receiving the Best Female Innovator trophy at the ICT Authority stand' },
@@ -362,5 +362,7 @@ export const navLinks = [
   { label: 'Projects', href: '#projects' },
   { label: 'Education', href: '#education' },
   { label: 'Certificates', href: '#certificates' },
+  { label: 'Awards', href: '#awards' },
   { label: 'Contact', href: '#contact' },
+
 ]

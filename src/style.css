@@ -13,13 +13,86 @@
   --color-ink-800: #151a2d;
   --color-ink-700: #1e2440;
 
-  --color-brand-300: #a5b4fc;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
+  /* Brand/accent resolve to the active palette (--p-* / --a-*, see below),
+     so the colour picker in the nav can swap them at runtime. */
+  --color-brand-200: var(--p-200);
+  --color-brand-300: var(--p-300);
+  --color-brand-400: var(--p-400);
+  --color-brand-500: var(--p-500);
+  --color-brand-600: var(--p-600);
 
-  --color-accent-400: #22d3ee;
-  --color-accent-500: #06b6d4;
+  --color-accent-400: var(--a-400);
+  --color-accent-500: var(--a-500);
+
+  /* Text on brand-coloured buttons: stays white in both themes. */
+  --color-on-brand: #ffffff;
+}
+
+/* ---------------------------------------------------------------------------
+   Accent palettes — chosen with the colour picker (html[data-accent]).
+   Each sets a primary scale (--p-*) and a secondary accent (--a-*).
+   --------------------------------------------------------------------------- */
+:root,
+:root[data-accent='indigo'] {
+  --p-200: #c7d2fe; --p-300: #a5b4fc; --p-400: #818cf8; --p-500: #6366f1; --p-600: #4f46e5; --p-700: #4338ca;
+  --a-400: #22d3ee; --a-500: #06b6d4; --a-600: #0891b2;
+}
+:root[data-accent='violet'] {
+  --p-200: #ddd6fe; --p-300: #c4b5fd; --p-400: #a78bfa; --p-500: #8b5cf6; --p-600: #7c3aed; --p-700: #6d28d9;
+  --a-400: #f472b6; --a-500: #ec4899; --a-600: #db2777;
+}
+:root[data-accent='rose'] {
+  --p-200: #fecdd3; --p-300: #fda4af; --p-400: #fb7185; --p-500: #f43f5e; --p-600: #e11d48; --p-700: #be123c;
+  --a-400: #fb923c; --a-500: #f97316; --a-600: #ea580c;
+}
+:root[data-accent='emerald'] {
+  --p-200: #a7f3d0; --p-300: #6ee7b7; --p-400: #34d399; --p-500: #10b981; --p-600: #059669; --p-700: #047857;
+  --a-400: #38bdf8; --a-500: #0ea5e9; --a-600: #0284c7;
+}
+:root[data-accent='sky'] {
+  --p-200: #bae6fd; --p-300: #7dd3fc; --p-400: #38bdf8; --p-500: #0ea5e9; --p-600: #0284c7; --p-700: #0369a1;
+  --a-400: #34d399; --a-500: #10b981; --a-600: #059669;
+}
+
+/* ---------------------------------------------------------------------------
+   Light theme (html[data-theme='light']).
+   Components are written with dark-theme classes, so this flips the
+   underlying colour variables instead of touching every class:
+   - ink (backgrounds) becomes near-white,
+   - slate (text) is inverted so slate-100 is the darkest text,
+   - white (used for subtle tints/borders like bg-white/5) becomes dark,
+   - brand/amber/emerald text shades get darker for contrast on white.
+   --------------------------------------------------------------------------- */
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --color-ink-950: #f8fafc;
+  --color-ink-900: #f1f5f9;
+  --color-ink-850: #ffffff;
+  --color-ink-800: #ffffff;
+  --color-ink-700: #e2e8f0;
+
+  --color-slate-100: #0f172a;
+  --color-slate-200: #1e293b;
+  --color-slate-300: #334155;
+  --color-slate-400: #475569;
+  --color-slate-500: #64748b;
+  --color-slate-600: #cbd5e1;
+
+  --color-white: #0f172a;
+
+  --color-brand-200: var(--p-700);
+  --color-brand-300: var(--p-600);
+  --color-brand-400: var(--p-500);
+  --color-accent-400: var(--a-600);
+
+  --color-amber-100: #78350f;
+  --color-amber-200: #92400e;
+  --color-amber-300: #b45309;
+  --color-emerald-400: #059669;
+}
+:root:not([data-theme='light']) {
+  color-scheme: dark;
 }
 
 /* ---------------------------------------------------------------------------
@@ -33,7 +106,10 @@
 
   body {
     background-color: var(--color-ink-950);
-    color: #cbd5e1;
+    color: var(--color-slate-300);
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -49,7 +125,7 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    color: #f1f5f9;
+    color: var(--color-slate-100);
     letter-spacing: -0.02em;
   }
 }
@@ -81,8 +157,16 @@
     color-mix(in oklab, var(--color-ink-800) 92%, transparent),
     color-mix(in oklab, var(--color-ink-900) 96%, transparent)
   );
-  border: 1px solid color-mix(in oklab, #ffffff 8%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-white) 8%, transparent);
   backdrop-filter: blur(6px);
+}
+
+/* Cards need a soft shadow to stand out on the light background. */
+:root[data-theme='light'] .card-surface {
+  box-shadow: 0 1px 3px rgb(15 23 42 / 0.06), 0 8px 24px -12px rgb(15 23 42 / 0.12);
+}
+:root[data-theme='light'] .blob {
+  opacity: 0.25;
 }
 
 /* ---------------------------------------------------------------------------

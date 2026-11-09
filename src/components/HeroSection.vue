@@ -22,12 +22,12 @@ const imgOk = ref(true)
   <section id="top" class="relative overflow-hidden pt-24 pb-4 sm:pt-28 sm:pb-6 lg:pt-32 lg:pb-8">
     <!-- ambient background -->
     <div class="pointer-events-none absolute inset-0 -z-10">
-      <div class="blob left-[-6rem] top-[-4rem] h-72 w-72" style="background: #4f46e5"></div>
-      <div class="blob right-[-8rem] top-24 h-80 w-80" style="background: #06b6d4; animation-delay: -6s"></div>
+      <div class="blob left-[-6rem] top-[-4rem] h-72 w-72" style="background: var(--color-brand-600)"></div>
+      <div class="blob right-[-8rem] top-24 h-80 w-80" style="background: var(--color-accent-500); animation-delay: -6s"></div>
       <div class="absolute inset-0 opacity-[0.06]" style="
           background-image:
-            linear-gradient(#fff 1px, transparent 1px),
-            linear-gradient(90deg, #fff 1px, transparent 1px);
+            linear-gradient(var(--color-white) 1px, transparent 1px),
+            linear-gradient(90deg, var(--color-white) 1px, transparent 1px);
           background-size: 56px 56px;
           mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 100%);
         "></div>
@@ -70,7 +70,7 @@ const imgOk = ref(true)
         <!-- Calls to action + social links -->
         <div v-reveal="{ delay: 240 }" class="mt-6 flex flex-wrap items-center gap-2.5 sm:mt-9 sm:gap-3 lg:mt-10">
           <a href="#projects"
-            class="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 px-4 py-2.5 text-sm font-semibold sm:px-5 sm:py-3 text-white shadow-lg shadow-brand-600/25 transition-transform hover:-translate-y-0.5">
+            class="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 px-4 py-2.5 text-sm font-semibold sm:px-5 sm:py-3 text-on-brand shadow-lg shadow-brand-600/25 transition-transform hover:-translate-y-0.5">
             View my work
             <AppIcon name="arrowRight" :size="16" class="transition-transform group-hover:translate-x-1" />
           </a>

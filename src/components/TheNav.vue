@@ -1,6 +1,7 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import AppIcon from './AppIcon.vue'
+import ThemeControls from './ThemeControls.vue'
 import { navLinks, personal } from '../data/cv.js'
 
 // Small avatar in the logo, resolved against the deploy base path.
@@ -67,6 +68,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
 
       <!-- Desktop actions -->
       <div class="hidden items-center gap-2 md:flex">
+        <ThemeControls />
         <a
           :href="personal.github"
           target="_blank"
@@ -77,22 +79,25 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
           <AppIcon name="github" :size="18" />
         </a>
         <a
-          :href="`mailto:${personal.email}`"
+          href="#contact"
           class="rounded-lg border border-brand-500/40 bg-brand-500/10 px-3.5 py-2 text-sm font-semibold text-brand-300 transition-colors hover:bg-brand-500/20"
         >
           Get in touch
         </a>
       </div>
 
-      <!-- Mobile hamburger / close toggle -->
-      <button
-        class="rounded-lg p-2 text-slate-300 md:hidden"
-        :aria-expanded="menuOpen"
-        aria-label="Toggle menu"
-        @click="menuOpen = !menuOpen"
-      >
-        <AppIcon :name="menuOpen ? 'close' : 'menu'" :size="22" />
-      </button>
+      <!-- Mobile: theme controls + hamburger / close toggle -->
+      <div class="flex items-center gap-1 md:hidden">
+        <ThemeControls />
+        <button
+          class="rounded-lg p-2 text-slate-300"
+          :aria-expanded="menuOpen"
+          aria-label="Toggle menu"
+          @click="menuOpen = !menuOpen"
+        >
+          <AppIcon :name="menuOpen ? 'close' : 'menu'" :size="22" />
+        </button>
+      </div>
     </nav>
 
     <!-- Mobile dropdown menu, slides/fades in below the bar -->
@@ -115,7 +120,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
           </li>
           <li class="mt-2 flex gap-2 px-3">
             <a
-              :href="`mailto:${personal.email}`"
+              href="#contact"
               class="flex-1 rounded-lg border border-brand-500/40 bg-brand-500/10 px-3 py-2.5 text-center text-sm font-semibold text-brand-300"
               @click="close"
             >

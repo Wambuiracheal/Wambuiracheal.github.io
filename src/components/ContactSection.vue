@@ -67,7 +67,7 @@ const channels = [
           <!-- Primary call to action -->
           <a
             :href="`mailto:${personal.email}`"
-            class="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-600/25 transition-transform hover:-translate-y-0.5"
+            class="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-brand-500 to-accent-500 px-5 py-3 text-sm font-semibold text-on-brand shadow-lg shadow-brand-600/25 transition-transform hover:-translate-y-0.5"
           >
             <AppIcon name="mail" :size="16" /> Send me an email
           </a>
