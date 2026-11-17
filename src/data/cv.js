@@ -239,7 +239,7 @@ export const projects = [
       'Fullstack artwork / CRUD management system with database flexibility across multiple relational databases; APIs tested via Postman.',
     url: 'https://horizon-artgallery.netlify.app/',
     tech: ['Flask', 'React', 'JavaScript', 'HTML', 'CSS', 'MySQL', 'SQLite'],
-    status: null,
+    status: 'In progress',
     featured: false,
   },
   {
