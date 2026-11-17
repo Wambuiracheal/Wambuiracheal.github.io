@@ -237,7 +237,7 @@ export const projects = [
     name: 'Art Gallery Management System',
     description:
       'Fullstack artwork / CRUD management system with database flexibility across multiple relational databases; APIs tested via Postman.',
-    url: null,
+    url: 'https://horizon-artgallery.netlify.app/',
     tech: ['Flask', 'React', 'JavaScript', 'HTML', 'CSS', 'MySQL', 'SQLite'],
     status: null,
     featured: false,
